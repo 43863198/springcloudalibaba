@@ -1,0 +1,24 @@
+server:
+  port: 8088
+spring:
+  application:
+    name: api-gateway
+#gateway 配置
+  cloud:
+    gateway:
+      routes:
+        - id: order-service #路由的唯一标识 这是局部过滤器，全局过滤器-一旦定义不需配置就可使用
+          uri: lb://order-service #需要转发的地址 使用nacos中的本地负载均衡策略
+          predicates:
+            - Path=/order-servi/**
+            #http://localhost:8088/order-servi/order/add
+            - Check=jimmy #自定义断言
+          filters:
+            - StripPrefix=1 #转发之前去掉第一层路径
+            - AddRequestHeader=X-request-color,red
+    nacos:
+      discovery:
+        server-addr: 120.79.2.76:8847
+        username: nacos
+        password: nacos
+#配置sentinel的dashboard

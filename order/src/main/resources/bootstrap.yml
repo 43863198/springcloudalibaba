@@ -1,0 +1,12 @@
+spring:
+  cloud:
+    nacos:
+      server-addr: 120.79.2.76:8847
+      username: nacos
+      password: nacos
+      config:
+        namespace: public
+        shared-configs:
+          - data-id: common.properties
+            refresh: true
+            #group:

@@ -1,0 +1,18 @@
+server:
+  port: 8088
+spring:
+  application:
+    name: api-gateway
+#gateway 配置
+  cloud:
+    gateway:
+      routes:
+        - id: order-service #路由的唯一标识
+          uri: http://localhost:8080 #需要转发的地址
+          predicates:
+            - Path = /order-servi/**
+            #http://localhost:8080/order-servi/order/add
+          filters:
+            - StripPrefix=1 #转发之前去掉第一层路径
+        #- id:
+

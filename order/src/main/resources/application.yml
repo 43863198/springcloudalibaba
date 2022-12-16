@@ -1,0 +1,33 @@
+server:
+  port: 8010
+spring:
+  application:
+    name: order-service
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 120.79.2.76:8847
+        username: nacos
+        password: nacos
+
+        #namespace: dev #大方向设置开发 测试 和 生产环境
+        #group: ocms  #可以设置不同得项目组
+        #ephemeral: false #永久示例，即使服务宕机了 也不会经过30秒从服务列表中删除,管理界面有保护阈值得设置，为了防止服务雪崩，一般不用
+#基于配置nacosrule 随机+权重
+#stock-service:
+#  ribbon:
+#    NFLoadBalancerRuleClassName: com.alibaba.cloud.nacos.ribbon.NacosRule
+
+#启动得时候就会去加载，并不是第一次去调用去加载
+#ribbon:
+#  eager-load:
+#    #开启饥饿加载
+#    enabled: true
+#    clients: stock-service
+#springboot 默认info ，feign得日志级别是debug
+#logging:
+#  level:
+#    com.demo.service.StockFeignService: debug
+
