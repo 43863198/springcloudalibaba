@@ -19,8 +19,8 @@ public class OrderController {
     StockFeignService stockFeignService;
 
     @RequestMapping("/add")
-    public String add(@RequestHeader("X-request-color") String color){
-        System.out.println("下单成功:" + color);
+    public String add(){
+        //System.out.println("下单成功:" + color);
         String response = stockFeignService.addStock(1);
         //String response = restTemplate.getForObject("http://stock-service/stock/reduce", String.class);
         return "success" + response;
