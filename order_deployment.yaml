@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order
+  namespace: test
+  labels:
+    component: order
+spec:
+  replicas: 2	#指定Pod副本数
+  selector:		#指定Pod的选择器
+    matchLabels:
+      app: order
+  template:
+    metadata:
+      labels:	#给Pod打label
+        app: order
+  #nodeSelector: # 使用节点选择器将Pod调度到指定label的节点
+  #   component: demo
+    spec:
+      containers:
+      - name: order
+        image: 47.104.2.213:5000/order:1.0
+        ports:
+        - containerPort: 8010

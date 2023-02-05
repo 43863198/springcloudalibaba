@@ -1,0 +1,75 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: springcloud
+  namespace: dev
+  labels:
+    component: spring
+spec:
+  nodeSelector: # 使用节点选择器将Pod调度到指定label的节点
+    component: mysql
+  containers:
+    - name: order
+      image: order:1.0
+      #      env:
+      #        - name: MYSQL_HOST   #  指定root用户的用户名
+      #          value: "127.0.0.1"
+      #        - name: MYSQL_PASSWD
+      #          value: "123456"
+      ports:
+        - containerPort: 8010
+      livenessProbe:
+        httpGet:
+          path: /order/add
+          port: 8010
+          scheme: HTTP
+        initialDelaySeconds: 5  # 容器启动后第一次执行探测是需要等待多少秒
+        periodSeconds: 10    # 执行探测的频率
+        timeoutSeconds: 2        # 探测超时时间
+    - name: stock
+      image: stock:1.0
+      ports:
+        - containerPort: 8011
+      livenessProbe:
+        httpGet:
+          path: /stock/reduce
+          port: 8011
+          scheme: HTTP
+        initialDelaySeconds: 10  # 容器启动后第一次执行探测是需要等待多少秒
+        periodSeconds: 10    # 执行探测的频率
+        timeoutSeconds: 2        # 探测超时时间
+      readinessProbe:
+        httpGet:
+          path: /stock/reduce
+          port: 8011
+          scheme: HTTP
+        initialDelaySeconds: 10
+        timeoutSeconds: 2
+        periodSeconds: 10
+    - name: gateway
+      image: gateway
+      ports:
+        - containerPort: 8088
+      livenessProbe:
+        httpGet:
+          path: /order-servi/order/add
+          port: 8088
+          scheme: HTTP
+        initialDelaySeconds: 10  # 容器启动后第一次执行探测是需要等待多少秒
+        periodSeconds: 10    # 执行探测的频率
+        timeoutSeconds: 2        # 探测超时时间
+      readinessProbe:
+        httpGet:
+          path: /order-servi/order/add
+          port: 8088
+          scheme: HTTP
+        initialDelaySeconds: 10
+        timeoutSeconds: 2
+        periodSeconds: 10
+      resources:
+        requests:
+          memory: 100Mi
+          cpu: 50m
+        limits:
+          memory: 500Mi
+          cpu: 100m

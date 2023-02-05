@@ -1,0 +1,12 @@
+spring:
+#  session:
+#    store-type: none
+  data:
+    redis:
+      repositories:
+        enabled: true
+#server:
+#  compression:
+#    enabled: false
+#  servlet:
+#    context-path: /${spring.application.name}

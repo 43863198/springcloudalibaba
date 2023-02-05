@@ -1,6 +1,7 @@
 package com.demo.service;
 
 import com.demo.config.FeignConfig;
+import com.my.distribute.lock.annotation.LockKey;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,4 +17,9 @@ public interface StockFeignService {
 
     @RequestMapping("/{id}")
     public String addStock(@PathVariable("id") Integer id);
+
+    @RequestMapping("/{id}")
+    public String addStock(@PathVariable("id") String id);
+
+    //public String addStock2(@LockKey String id);
 }

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: stock
+  namespace: dev
+  labels:
+    component: stock
+spec:
+  #nodeSelector: # 使用节点选择器将Pod调度到指定label的节点
+  #  component: demo
+  containers:
+    - name: stock 
+      image: 47.104.2.213:5000/stock:1.0
+      ports:
+        - containerPort: 8011

@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: common
+  namespace: dev
+data:
+  MYSQL_HOST: "47.104.2.213"
+  MYSQL_PORT: "3306"

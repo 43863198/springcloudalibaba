@@ -11,10 +11,20 @@ spring:
         server-addr: 120.79.2.76:8847
         username: nacos
         password: nacos
-
-        #namespace: dev #大方向设置开发 测试 和 生产环境
+  redis:
+    host: 120.79.2.76
+    #MTIzNDU2
+    password: 123456
+    port: 6379
+  #namespace: dev #大方向设置开发 测试 和 生产环境
         #group: ocms  #可以设置不同得项目组
         #ephemeral: false #永久示例，即使服务宕机了 也不会经过30秒从服务列表中删除,管理界面有保护阈值得设置，为了防止服务雪崩，一般不用
+#    jedis:
+#      pool:
+#        max-active: 1
+#        max-idle: 1
+#        max-wait: -1
+#        min-idle: 1
 #基于配置nacosrule 随机+权重
 #stock-service:
 #  ribbon:

@@ -9,4 +9,4 @@ spring:
         shared-configs:
           - data-id: common.properties
             refresh: true
-            #group:
+            group:
