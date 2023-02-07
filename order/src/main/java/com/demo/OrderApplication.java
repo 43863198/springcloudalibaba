@@ -1,6 +1,7 @@
 package com.demo;
 
 import com.my.distribute.lock.annotation.EnableDistributedLock;
+import com.my.message.annotation.EnableMessageCore;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -12,6 +13,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 @EnableFeignClients
 @RefreshScope
 @EnableDistributedLock
+@EnableMessageCore
 //@RibbonClients(value = {@RibbonClient(name = "stock-service",configuration = RibbonRandomRuleConfig.class)})
 public class OrderApplication {
     public static void main(String[] args) {

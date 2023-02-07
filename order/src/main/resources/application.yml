@@ -6,11 +6,31 @@ spring:
   profiles:
     active: dev
   cloud:
-    nacos:
-      discovery:
-        server-addr: 120.79.2.76:8847
-        username: nacos
-        password: nacos
+#    nacos:
+#      discovery:
+#        server-addr: 120.79.2.76:8847
+#        username: nacos
+#        password: nacos
+    stream:
+      default-binder: rabbit
+      rabbit:
+        bindings:
+          ORDER_SETTLE_TO_STOCK_OUTPUT:
+            producer:
+              confirmAckChannel: streamAckCallBack
+              autoBindDlq: true
+              deadLetterExchange: WAITING_EXCHANGE
+              deadLetterQueueName: OCMS_WAITING_QUEUE
+              dlqTtl: 5000
+              dlqDeadLetterExchange:
+      bindings:
+        ORDER_SETTLE_TO_STOCK_OUTPUT:
+          destination: ORDER_SETTLE_TO_STOCK
+          producer:
+            partitionKeyExpression: headers['partitionKey']
+            partitionCount: 1
+            requiredGroups: group
+            errorChannelEnabled: true
   redis:
     host: 120.79.2.76
     #MTIzNDU2
@@ -40,4 +60,19 @@ spring:
 #logging:
 #  level:
 #    com.demo.service.StockFeignService: debug
+  rabbitmq:
+    host: 120.79.2.76
+    port: 5672
+    username: zsr
+    password: 123456
+    publisher-returns: false
+    publisher-confirm-type: correlated
+  datasource:
+    druid:
+      url: jdbc:mysql://120.79.2.76:3306/order?autoReconnect=true&failOverReadOnly=false&useUnicode=true&characterEncoding=utf-8&useSSL=false&useOldAliasMetadataBehavior=true&serverTimezone=GMT%2B8&zeroDateTimeBehavior=CONVERT_TO_NULL&netTimeoutForStreamingResults=0&connectTimeout=2000
+      username: root
+      password: root
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      type: com.alibaba.druid.pool.DruidDataSource
+
 

@@ -10,6 +10,7 @@
         <module>my-distributed-lock-core</module>
         <module>my-common-redis</module>
         <module>my-common</module>
+        <module>common-message-core</module>
     </modules>
     <!-- 以后parent去继承公司自定义的父maven项目-->
 <!--    <parent>-->
@@ -48,6 +49,19 @@
             <artifactId>commons-codec</artifactId>
             <version>1.10</version>
         </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.21</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>1.1.10</version>
+        </dependency>
+
     </dependencies>
 
     <dependencyManagement>

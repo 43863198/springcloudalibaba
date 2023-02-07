@@ -30,11 +30,11 @@ public class OrderController {
 
     @RequestMapping("/add")
     public String add(@LockKey String name){
-        //System.out.println("下单成功:" + color);
+       // System.out.println("下单成功:" + color);
         String key1 = "123";
-        String response = stockFeignService.addStock(name);
+        String response = stockFeignService.addStock1(name);
         //String response = restTemplate.getForObject("http://stock-service/stock/reduce", String.class);
-        return "success" + response;
+        return "success";
     }
 
     @RequestMapping("/orderConfirm")
