@@ -6,11 +6,11 @@ spring:
   profiles:
     active: dev
   cloud:
-#    nacos:
-#      discovery:
-#        server-addr: 120.79.2.76:8847
-#        username: nacos
-#        password: nacos
+    nacos:
+      discovery:
+        server-addr: 120.79.2.76:8847
+        username: nacos
+        password: nacos
     stream:
       default-binder: rabbit
       rabbit:
@@ -73,6 +73,6 @@ spring:
       username: root
       password: root
       driver-class-name: com.mysql.cj.jdbc.Driver
-      type: com.alibaba.druid.pool.DruidDataSource
+      db-type: com.alibaba.druid.pool.DruidDataSource
 
 
